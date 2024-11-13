@@ -65,7 +65,9 @@ namespace Savarankiskas4.Core.Repo
             {
                 connection.Open();
 
-                allUsers = connection.Query<User>("SELECT * FROM Users").ToList();
+                allUsers.AddRange(connection.Query<Admin>("SELECT * FROM Users WHERE Role = 'Administrator'").ToList());
+
+                allUsers.AddRange(connection.Query<StandardUser>("SELECT * FROM Users WHERE Role = 'Standard User'").ToList());
             }
             return allUsers;
         }

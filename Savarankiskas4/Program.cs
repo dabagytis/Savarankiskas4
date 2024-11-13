@@ -251,38 +251,32 @@ public class Program
                     continue;
 
                 case 7:
-                    // Klaidingas ListUsersByRole
                     while (true)
                     {
                         Console.WriteLine("Select role:");
                         Console.WriteLine("1. Administrators");
                         Console.WriteLine("2. Standard Users");
                         int rolePick = int.Parse(Console.ReadLine());
-                        string role = "";
                         Console.WriteLine();
-                        if (rolePick == 1)
-                        {
-                            role = "Administrator";
-                            foreach(User a in userService.ListUsersByRole(role))
-                            {
-                                Console.WriteLine(a);
-                            }
-                            break;
-                        }
-                        else if (rolePick == 2)
-                        {
-                            role = "Standard User";
-                            foreach (User a in userService.ListUsersByRole(role))
-                            {
-                                Console.WriteLine(a);
-                            }
-                            break;
-                        }
-                        else
+                        if(rolePick != 1 && rolePick != 2)
                         {
                             Console.WriteLine("Invalid choice, please try again.");
                             Console.WriteLine();
+                            continue;
                         }
+                        foreach(User a in userService.GetAllUsers())
+                        {
+                            if(rolePick == 1 && a is Admin)
+                            {
+                                Console.WriteLine(a);
+                            }
+                            else if(rolePick == 2 && a is StandardUser)
+                            {
+                                Console.WriteLine(a);
+                            }
+                        }
+                        Console.WriteLine();
+                        break;
                     }
                     continue;
 

@@ -42,32 +42,9 @@ namespace Savarankiskas4.Core.Services
             return _userRepository.GetUserById(id);
         }
 
-        // Klaidingas metodas
         public List<User> ListUsersByRole(string role)
         {
-            List<User> usersByRole = new List<User>();
-            List<User> allUsers = GetAllUsers();
-            if(role == "Administrator")
-            {
-                foreach (User a in allUsers)
-                {
-                    if (a is Admin)
-                    {
-                        usersByRole.Add(a);
-                    }
-                }
-            }
-            else if(role == "Standard User")
-            {
-                foreach (User a in allUsers)
-                {
-                    if (a is StandardUser)
-                    {
-                        usersByRole.Add(a);
-                    }
-                }
-            }
-            return usersByRole;
+            return _userRepository.GetAllUsers();
         }
 
         public void RegisterUser(User user)
